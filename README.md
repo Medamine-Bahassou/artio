@@ -1,3 +1,5 @@
+<img src="./screenshots/logo.png" width="300px" />
+
 # Artio - Image Generation
 
 Artio is a web application that allows you to generate images using AI.

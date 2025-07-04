@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Image from 'next/image';
+import logo from '../assets/logo.png';
 import "./index.css";
 
 type AspectRatio = '1:1' | '16:9' | '9:16' | 'custom';
@@ -104,6 +106,9 @@ const App = () => {
 
   return (
     <div className="app-container">
+      <div className="logo-container">
+        <Image src={logo} alt="Logo" width={100} height={100} />
+      </div>
       <h1>What will you create?</h1>
 
       <div className="prompt-container">
