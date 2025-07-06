@@ -10,6 +10,7 @@ Here are some screenshots of the application in action:
 
 ![Screenshot 1](./screenshots/1.png)
 
+**Images generated**
 ![Screenshot 2](./screenshots/2.png)
 
 ## Running the Project
