@@ -141,7 +141,7 @@ const ImageGeneratorPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center">
       {/* Fixed Header for Prompt Input */}
-      <div className={`fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ease-in-out ${scrolled ? 'py-2' : 'py-4 sm:py-8'}`}>
+      <div className={`fixed top-0 z-50 w-full  bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ease-in-out ${scrolled ? 'py-2 border-b' : 'py-4 sm:py-8'}`}>
         <div className={`container mx-auto flex items-center gap-4 px-4 ${scrolled ? 'flex-row justify-between' : 'flex-col justify-center'}`}>
           <div className={`flex items-center gap-4 ${scrolled ? 'flex-row' : 'flex-col'}`}>
             <Image src={logo} alt="Logo" width={scrolled ? 60 : 100} height={scrolled ? 40 : 100} className="transition-all duration-300 ease-in-out" key="app-logo" />
