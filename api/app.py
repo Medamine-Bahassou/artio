@@ -1,22 +1,20 @@
-import streamlit as st
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
-# Title
-st.title("🖼️ Pollinations AI Image Generator")
+app = Flask(__name__)
+CORS(app)
 
-# User input for the image description
-prompt = st.text_input("Enter your image prompt (e.g., 'a bold man wearing a hat')", "")
+@app.route('/generate', methods=['POST'])
+def generate():
+    data = request.get_json()
+    prompt = data.get('prompt', '')
+    style1 = data.get('style1', 'gritty realism')
+    style2 = data.get('style2', 'vintage photography')
+    style3 = data.get('style3', 'dramatic lighting')
+    width = data.get('width', 400)
+    height = data.get('height', 400)
+    num_outputs = data.get('num_outputs', 1)
 
-# Optional user inputs for style keywords
-style1 = st.text_input("Style 1 (optional)", "gritty realism")
-style2 = st.text_input("Style 2 (optional)", "vintage photography")
-style3 = st.text_input("Style 3 (optional)", "dramatic lighting")
-
-# Width and height input
-width = st.number_input("Image Width (px)", min_value=50, max_value=1024, value=400)
-height = st.number_input("Image Height (px)", min_value=50, max_value=1024, value=400)
-
-# Generate button
-if st.button("Generate Image"):
     # Convert the prompt into URL-friendly format
     title = prompt.replace(" ", "%20")
     description = f"A%20generated%20image%20of%20{prompt.replace(' ', '%20')}"
@@ -25,16 +23,19 @@ if st.button("Generate Image"):
     style_3 = style3.replace(" ", "%20")
 
     # Build the final URL
-    url = (
-        f"https://image.pollinations.ai/prompt/(photorealistic:1.4),"
-        f"{title},{description},{style_1},{style_2},{style_3}"
-        f"?width={width}px&height={height}px&nologo=true"
-    )
+    image_urls = []
+    for i in range(num_outputs):
+        seed = i  # Use a different seed for each image
+        image_url = (
+            f"https://image.pollinations.ai/prompt/(photorealistic:1.4),"
+            f"{title},{description},{style_1},{style_2},{style_3}"
+            f"?width={width}px&height={height}px&nologo=true&seed={seed}"
+        )
+        image_urls.append(image_url)
+        
+    return jsonify({'image_urls': image_urls})
 
-    # Show the link and the image
-    st.markdown(f"### ✅ [**CLICK TO VIEW OR DOWNLOAD IMAGE**]({url})")
-    st.image(url, caption="Generated Image", width=width)
+handler = app
 
-    # Debug (optional)
-    st.code(url, language="markdown")
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
