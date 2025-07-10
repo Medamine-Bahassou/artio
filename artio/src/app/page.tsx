@@ -93,7 +93,7 @@ const ImageGeneratorPage = () => {
 
     try {
       // Replace with your actual API endpoint
-      const response = await fetch(`https://${apiUrl}/generate`, {
+      const response = await fetch(`https://artio-production.up.railway.app/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, width, height, num_outputs: numOutputs }),
