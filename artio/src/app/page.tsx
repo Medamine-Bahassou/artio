@@ -89,7 +89,6 @@ const ImageGeneratorPage = () => {
       }
     }
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    console.log("API URL:", apiUrl); // Add this line for debugging
 
     try {
       // Replace with your actual API endpoint
