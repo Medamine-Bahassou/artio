@@ -88,11 +88,12 @@ const ImageGeneratorPage = () => {
         return;
       }
     }
-    const apiUrl = process.env.API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    console.log("API URL:", apiUrl); // Add this line for debugging
 
     try {
       // Replace with your actual API endpoint
-      const response = await fetch(`${apiUrl}/generate`, {
+      const response = await fetch(`https://${apiUrl}/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, width, height, num_outputs: numOutputs }),
